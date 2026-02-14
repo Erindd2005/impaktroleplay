@@ -6,265 +6,200 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 /* RESET & BODY */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,Arial,sans-serif}
-body{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);color:#fff;min-height:100vh;overflow-x:hidden}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,Arial,sans-serif;}
+body{background:linear-gradient(135deg,#1c1c1c,#2f2f2f);color:#fff;min-height:100vh;overflow-x:hidden;padding:20px;}
 
 /* LOGIN */
-#login{position:fixed; inset:0;background:rgba(0,0,0,0.9);display:flex; align-items:center; justify-content:center; z-index:9999;}
-.login-box{background:rgba(25,25,25,0.95); padding:40px 35px; border-radius:20px; width:360px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,0.7); backdrop-filter:blur(8px); transition:0.4s;}
-.login-box h2{margin-bottom:25px;font-size:30px;color:#ff4757;text-shadow:0 0 8px rgba(255,71,87,0.8);}
-.login-box input{width:100%;padding:14px;margin:10px 0;border-radius:10px;border:none;background:#222;color:#fff;font-size:16px;transition:0.3s;}
-.login-box input:focus{outline:none;box-shadow:0 0 10px #ff4757;}
-.login-box button{margin-top:18px;width:100%;padding:14px;background:#ff4757;border:none;border-radius:10px;color:#fff;font-weight:bold;font-size:16px;cursor:pointer;transition:0.3s;}
-.login-box button:hover{background:#e84118;transform:scale(1.02);}
-#error{color:#ff6b6b;margin-top:12px;display:none;font-size:15px;}
+#login{position:fixed; inset:0;background:rgba(0,0,0,0.95);display:flex; align-items:center; justify-content:center; z-index:9999;}
+.login-box{background:rgba(30,30,30,0.95); padding:40px 35px; border-radius:15px; width:350px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.8);}
+.login-box h2{margin-bottom:20px;color:#257870;}
+.login-box input{width:100%;padding:14px;margin:10px 0;border-radius:8px;border:none;background:#222;color:#fff;font-size:16px;}
+.login-box input:focus{outline:none;box-shadow:0 0 10px #257870;}
+.login-box button{margin-top:15px;width:100%;padding:14px;background:#257870;border:none;border-radius:8px;color:#fff;font-weight:bold;cursor:pointer;}
+.login-box button:hover{background:#1f5f5b;}
 
 /* HEADER */
-.header-top{position: relative; padding:50px 20px; text-align:center; border-bottom:3px solid #ff4757; border-radius:0 0 20px 20px; background: url('https://media.discordapp.net/attachments/1326278982483836982/1469799680891424768/ssG40dQ.png') center/cover no-repeat; background-size:cover;}
-.header-top::before{content:""; position:absolute; inset:0; background: rgba(0,0,0,0.5); backdrop-filter: blur(6px); border-radius:0 0 20px 20px;}
-.header-top img{width:120px;margin-bottom:15px;position:relative;z-index:1; border-radius:50%; border:3px solid #ff4757; background:#111;}
-.header-top h1{font-size:40px;letter-spacing:3px;position:relative;z-index:1; text-shadow:0 0 10px rgba(0,0,0,0.7);}
+.header-top{padding:30px;text-align:center; border-bottom:3px solid #257870; border-radius:0 0 15px 15px; background: url('https://media.discordapp.net/attachments/1326278982483836982/1469799680891424768/ssG40dQ.png?ex=6990395f&is=698ee7df&hm=3e1f7692e1c4d1dd32b5c8cbcf0122d3140cb08422a4577732b4436708278dcb&=&format=webp&quality=lossless&width=521&height=107') center/cover no-repeat;}
+.header-top img{width:120px;margin-bottom:15px;border-radius:50%;border:3px solid #257870;}
+.header-top h1{font-size:36px;letter-spacing:2px;text-shadow:0 0 8px rgba(0,0,0,0.6);}
 
-/* CONTAINER & CARDS */
-.container{max-width:1000px;margin:60px auto;padding:40px; display:none; display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;}
-.card{background:rgba(20,20,20,0.85); padding:20px; border-radius:15px; cursor:pointer; transition:0.4s; box-shadow:0 5px 20px rgba(0,0,0,0.5); display:flex; align-items:center;}
-.card:hover{transform:scale(1.03); box-shadow:0 10px 30px rgba(255,71,87,0.5);}
-.card img{width:50px;height:50px;margin-right:15px; border-radius:50%; border:2px solid #ff4757;}
-.card span{font-size:18px; font-weight:bold;}
-
-/* MODAL */
-.modal{display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background:rgba(0,0,0,0.9); backdrop-filter:blur(6px); transition:0.3s;}
-.modal-content{background:#111; margin:80px auto; padding:30px; border-radius:15px; width:90%; max-width:600px; box-shadow:0 10px 30px rgba(0,0,0,0.7); position:relative;}
-.modal-content h2{margin-bottom:20px; color:#ff4757;}
-.modal-content ul{padding-left:20px;}
-.modal-content li{margin-bottom:12px; line-height:1.5;}
-.modal-content h3{margin-top:15px;color:#ff6b6b;}
-.close{position:absolute; top:15px; right:20px; font-size:28px; font-weight:bold; color:#ff4757; cursor:pointer; transition:0.3s;}
-.close:hover{color:#e84118;}
+/* STAFF DROPDOWNS */
+.staff-list{max-width:500px;margin:40px auto; display:flex; flex-direction:column; gap:20px;}
+.staff-item{background:rgba(30,30,30,0.85); padding:20px; border-radius:12px; display:flex; flex-direction:column; gap:10px; box-shadow:0 5px 15px rgba(0,0,0,0.5);}
+.staff-item label{font-weight:bold;font-size:16px;color:#257870; display:flex; align-items:center; gap:8px;}
+.staff-item label img{width:24px;height:24px;}
+.staff-item select{padding:10px;border-radius:8px;border:none;background:#222;color:#fff;font-size:16px;cursor:pointer;}
+.tasks{background:rgba(40,40,40,0.8);padding:15px;border-radius:8px; max-height:400px; overflow-y:auto;}
+.tasks h3{color:#257870;margin-bottom:10px;}
+.tasks ul{list-style:disc;padding-left:20px;}
+.tasks li{margin-bottom:8px;line-height:1.5;}
 
 /* SNOW */
 .snow{position:fixed;top:-10px;color:white;user-select:none;z-index:1; animation:fall linear infinite;opacity:0.7; font-size:14px;}
 @keyframes fall{to{transform:translateY(110vh);}}
 
-/* COLLAPSIBLE IMPORTANT NOTES */
-#importantBtn{width:100%;padding:18px;background:rgba(255,71,87,0.85);color:#fff;font-size:18px;font-weight:bold;border:none;border-radius:12px;cursor:pointer;transition:0.3s;box-shadow:0 5px 20px rgba(0,0,0,0.5);}
-#importantBtn:hover{background:#e84118; transform:scale(1.02);}
-#importantContent{max-height:0;overflow:hidden;transition:max-height 0.4s ease;background:rgba(255,71,87,0.15);padding:0 20px;border-radius:12px;margin-top:10px;box-shadow:0 5px 20px rgba(0,0,0,0.3);}
-#importantContent p{color:#fff;font-size:16px;line-height:1.6;padding:15px 0;}
+/* FOOTER */
+footer{background:rgba(30,30,30,0.9);text-align:center;padding:20px;margin-top:30px;border-top:2px solid #257870;color:#fff;font-size:14px;border-radius:15px 15px 0 0;}
+footer a{color:#257870;text-decoration:none;font-weight:bold; margin:0 5px;}
+footer a:hover{color:#1f5f5b;}
 
 /* RESPONSIVE */
-@media(max-width:700px){.card img{width:40px;height:40px;}}
+@media(max-width:600px){.header-top h1{font-size:28px;}}
 </style>
 </head>
 <body>
-<!--
--- LOGIN -
+
+<!-- LOGIN -->
 <div id="login">
   <div class="login-box">
     <h2>Staff Access</h2>
     <input type="password" id="pass" placeholder="Password">
     <button onclick="login()">Login</button>
-    <div id="error">Wrong password</div>
+    <div id="error" style="color:#257870;margin-top:10px;display:none;">Wrong password</div>
   </div>
 </div>
--->
+
 <!-- HEADER -->
 <div class="header-top">
-  <img src="https://media.discordapp.net/attachments/1470852756959920388/1470852776199323750/Screenshot_20260210_194340_Discord.jpg?ex=698ccde4&is=698b7c64&hm=1fc53510bbbc39f6b33b4177f8527ad0bf2e9d66a991ebfed321f7c63c74a2f6&=&format=webp&width=218&height=224">
+  <img src="https://images-ext-1.discordapp.net/external/ALzH0tsTLt2oebOGirYRQtOMeK-fONmed_itdCkOJ7U/%3Fsize%3D4096/https/cdn.discordapp.com/icons/1238978543892041789/9807086677316dc3077a8cb894862409.png?format=webp&quality=lossless&width=370&height=370">
   <h1>IMPACT ROLEPLAY</h1>
 </div>
 
-<!-- CARDS -->
-<div class="container">
-  <div class="card" onclick="openModal('Management')"><img src="https://media.discordapp.net/attachments/1248771175878758483/1470846265213321419/Management.webp?ex=698cc7d4&is=698b7654&hm=765560a24dfc3e8add0315e8b392b912ed7ce0f69feca853dd40906e4058bbe4&=&format=webp&width=160&height=160"><span>Management – Xika</span></div>
-  <div class="card" onclick="openModal('DeveloperOktavian')"><img src="https://media.discordapp.net/attachments/1248771175878758483/1470846267281375232/Executive.webp?ex=698cc7d5&is=698b7655&hm=f5b4a12e07de75f0af8f790960c78ade502de8f38d2923a8089f82e144bc6ab6&=&format=webp&width=160&height=160"><span>Developer – Oktavian</span></div>
-  <div class="card" onclick="openModal('ExecutiveKlearti')"><img src="https://media.discordapp.net/attachments/1248771175878758483/1470846267281375232/Executive.webp?ex=698cc7d5&is=698b7655&hm=f5b4a12e07de75f0af8f790960c78ade502de8f38d2923a8089f82e144bc6ab6&=&format=webp&width=160&height=160"><span>Executive – Klearti</span></div>
-  <div class="card" onclick="openModal('ExecutiveDenozzi')"><img src="https://media.discordapp.net/attachments/1248771175878758483/1470846267281375232/Executive.webp?ex=698cc7d5&is=698b7655&hm=f5b4a12e07de75f0af8f790960c78ade502de8f38d2923a8089f82e144bc6ab6&=&format=webp&width=160&height=160"><span>Executive – Denozzi</span></div>
-  <div class="card" onclick="openModal('HeadAdmin')"><img src="https://cdn.discordapp.com/attachments/1248771175878758483/1470851614234378301/Head.webp?ex=698ccccf&is=698b7b4f&hm=026141a82033e27fe77329a7d9e77ff515cf0737126b6fb66aae7c02d6d77458&"><span>Head Admin – Hasbulla / Teo / Snaky</span></div>
-  <div class="card" onclick="openModal('GeneralAdmin')"><img src="https://media.discordapp.net/attachments/1248771175878758483/1470851582320185488/Admin.webp?ex=698cccc8&is=698b7b48&hm=29f6bd9c7c7dfaa77da57280687608191b3259a224579d3a9ba66d642f5e18c6&=&format=webp&width=160&height=160"><span>General Admin – Klevi / Kristo</span></div>
-  <div class="card" onclick="openModal('JuniorAdmin')"><img src="https://media.discordapp.net/attachments/1248771175878758483/1470851582320185488/Admin.webp?ex=698cccc8&is=698b7b48&hm=29f6bd9c7c7dfaa77da57280687608191b3259a224579d3a9ba66d642f5e18c6&=&format=webp&width=160&height=160"><span>Junior Admin – Niko</span></div>
-  <div class="card" onclick="openModal('TrialAdmin')"><img src="https://media.discordapp.net/attachments/1248771175878758483/1470851582320185488/Admin.webp?ex=698cccc8&is=698b7b48&hm=29f6bd9c7c7dfaa77da57280687608191b3259a224579d3a9ba66d642f5e18c6&=&format=webp&width=160&height=160"><span>Trial Admin – Albozzi</span></div>
-  <div class="card" onclick="openModal('Helper')"><img src="https://media.discordapp.net/attachments/1248771175878758483/1470851658643804463/Helper.webp?ex=698cccda&is=698b7b5a&hm=46b5965e64cb201d3e97974757f58b8cc7127f4001ea305bea61679631d506af&=&format=webp&width=160&height=160"><span>Helper – Loco / Rohan / Leo</span></div>
-  <div class="card" onclick="openModal('StaffRules')"><img src="https://media.discordapp.net/attachments/1248771175878758483/1470846268346466405/cheatteam.webp?ex=698cc7d5&is=698b7655&hm=6f00168cf04fd118dfde01360f9b711277824424ada427c31ba07353beb0653f&=&format=webp&width=544&height=544"><span>Staff Rules</span></div>
-</div>
+<!-- STAFF LIST -->
+<div class="staff-list" style="display:none;">
 
-<!-- MODALS -->
-<div id="Management" class="modal">
-  <div class="modal-content"><span class="close" onclick="closeModal('Management')">&times;</span>
-    <h2>Management – Xika</h2>
-    <ul>
-      <li>Vendime kryesore për serverin</li>
-      <li>Miratim i rregullave, update-ve dhe aktiviteteve</li>
-      <li>Mbikqyrja e stafit Executive dhe Head Admin</li>
-      <li>Koordinim me Mod-at: Event, Faction, Gang</li>
-      <li>Siguron që gjithçka funksionon sipas rregullave</li>
-    </ul>
+  <div class="staff-item">
+    <label><img src="https://media.discordapp.net/attachments/1326278982483836982/1469816259854995548/Management.png?ex=699048d0&is=698ef750&hm=08bd6fd761c9f01ab7964eab761d254a492b046077aac9998e7911df7d766eb3&=&format=webp&quality=lossless&width=98&height=98" alt=""> Management</label>
+    <select onchange="showTasks('management', this.value)">
+      <option value="">Select person</option>
+      <option value="Xika">Xika</option>
+    </select>
+    <div id="management" class="tasks"></div>
   </div>
-</div>
 
-<div id="DeveloperOktavian" class="modal">
-  <div class="modal-content"><span class="close" onclick="closeModal('DeveloperOktavian')">&times;</span>
-    <h2>Developer – Oktavian</h2>
-    <ul>
-      <li>Menaxhimi dhe mirëmbajtja e skripteve të serverit</li>
-      <li>Implementimi i funksioneve të reja sipas kërkesave të stafit dhe management-it</li>
-      <li>Rregullimi i bugs / problemeve teknike</li>
-      <li>Sigurimi që serveri të funksionojë stabil dhe me performancë optimale</li>
-      <li>Dokumentim i skripteve dhe update-ve për referencë të stafit</li>
-      <li>Testimi i funksioneve para publikimit në server</li>
-      <li>Bashkëpunim me Event Mods, Faction Mods dhe staf tjetër</li>
-      <li>Propozimi i përmirësimeve dhe optimizimeve për sistemet ekzistuese</li>
-    </ul>
-    <h3>Vërejtje:</h3>
-    <p>Çdo ndërhyrje në skripte duhet të aprovohet nga <strong>Management/Executive</strong>. Mos abuzo me aksesin në databaza ose komanda kritike pa leje.</p>
+  <div class="staff-item">
+    <label><img src="https://media.discordapp.net/attachments/1326278982483836982/1469816260442329335/mapper.png?ex=699048d0&is=698ef750&hm=96ca4f6a8924bc97e84c6f6302ac159f17f84027f82d4c1e82155eca5532aebc&=&format=webp&quality=lossless&width=333&height=333" alt=""> Developer</label>
+    <select onchange="showTasks('developer', this.value)">
+      <option value="">Select person</option>
+      <option value="Oktavian">Oktavian</option>
+    </select>
+    <div id="developer" class="tasks"></div>
   </div>
-</div>
 
-<div id="ExecutiveKlearti" class="modal">
-  <div class="modal-content"><span class="close" onclick="closeModal('ExecutiveKlearti')">&times;</span>
-    <h2>Executive – Klearti</h2>
-    <ul>
-      <li>Mbikqyrja e stafit (Head/Admin/Helper)</li>
-      <li>Vendime në raste serioze</li>
-      <li>Zbatimi i rregullave</li>
-      <li>Promovim / ulje staf</li>
-      <li>Faction Mod / Event Mod</li>
-      <li>Asistim gjatë Gang Modit</li>
-    </ul>
+  <div class="staff-item">
+    <label><img src="https://media.discordapp.net/attachments/1326278982483836982/1469816257279688947/Executive.png?ex=699048cf&is=698ef74f&hm=2d0bc8a104e94c7d031ac97735d6203065825a49c36de7716a935df03348bc07&=&format=webp&quality=lossless&width=98&height=98" alt=""> Executive</label>
+    <select onchange="showTasks('executive', this.value)">
+      <option value="">Select person</option>
+      <option value="Klearti">Klearti</option>
+      <option value="Denozzi">Denozzi</option>
+    </select>
+    <div id="executive" class="tasks"></div>
   </div>
-</div>
 
-<div id="ExecutiveDenozzi" class="modal">
-  <div class="modal-content"><span class="close" onclick="closeModal('ExecutiveDenozzi')">&times;</span>
-    <h2>Executive – Denozzi</h2>
-    <ul>
-      <li>Mbikqyrja e stafit operativ</li>
-      <li>Event Mod / Gang Mod / Mapper</li>
-      <li>Shqyrtim ankesa dhe raporte</li>
-      <li>Trajnim dhe asistim për staf</li>
-      <li>Raportim te Executive</li>
-      <li>Siguron që eventet ecin qartë</li>
-    </ul>
+  <div class="staff-item">
+    <label><img src="https://media.discordapp.net/attachments/1326278982483836982/1469816258533789776/Head.png?ex=699048cf&is=698ef74f&hm=ff440c57d0c6ef55e6f4ef6da1798ff59c2d70a6b75c0a3e7fb2a9ae320fc652&=&format=webp&quality=lossless&width=98&height=98" alt=""> Head Admin</label>
+    <select onchange="showTasks('headadmin', this.value)">
+      <option value="">Select person</option>
+      <option value="Useli">Useli</option>
+      <option value="Mateo">Mateo</option>
+      <option value="Snaky">Snaky</option>
+    </select>
+    <div id="headadmin" class="tasks"></div>
   </div>
-</div>
 
-<div id="HeadAdmin" class="modal">
-  <div class="modal-content"><span class="close" onclick="closeModal('HeadAdmin')">&times;</span>
-    <h2>Head Admin – Hasbulla / Teo / Snaky</h2>
-    <ul>
-      <li>Mbikqyrja e General & Junior Admin</li>
-      <li>Zgjidhje raste serioze</li>
-      <li>Trajnim i stafit të ri</li>
-      <li>Supervizim Faction / Gang / Event</li>
-      <li>Kontrolle operative</li>
-    </ul>
+  <div class="staff-item">
+    <label><img src="https://media.discordapp.net/attachments/1326278982483836982/1469816248391962807/Admin.png?ex=699048cd&is=698ef74d&hm=2970e178504cc540f6bb599c06228320cdd8e9dd9349785b1af52ded95ad64bf&=&format=webp&quality=lossless&width=98&height=98" alt=""> Admin</label>
+    <select onchange="showTasks('admin', this.value)">
+      <option value="">Select person</option>
+      <option value="Albozzi">Albozzi</option>
+      <option value="Kristo">Kristo</option>
+      <option value="Erdi">Erdi</option>
+      <option value="Edi">Edi</option>
+      <option value="Carlo">Carlo</option>
+    </select>
+    <div id="admin" class="tasks"></div>
   </div>
-</div>
 
-<div id="GeneralAdmin" class="modal">
-  <div class="modal-content"><span class="close" onclick="closeModal('GeneralAdmin')">&times;</span>
-    <h2>General Admin – Klevi / Kristo</h2>
-    <ul>
-      <li>Mbajtja e rregullit</li>
-      <li>Ndihmë për lojtarët</li>
-      <li>Raportim te Head Admin</li>
-      <li>Suport Faction / Gang / Event</li>
-    </ul>
+  <div class="staff-item">
+    <label><img src="https://media.discordapp.net/attachments/1326278982483836982/1469816259087433822/Helper.png?ex=699048d0&is=698ef750&hm=6846e7aa44c5847f6249067721acd8129be98c805bb661fb53984a18c4b50b26&=&format=webp&quality=lossless&width=98&height=98" alt=""> Helper</label>
+    <select onchange="showTasks('helper', this.value)">
+      <option value="">Select person</option>
+      <option value="Loco">Loco</option>
+      <option value="Loku">Loku</option>
+      <option value="Rohan">Rohan</option>
+      <option value="Snizzy">Snizzy</option>
+      <option value="Tomas">Tomas</option>
+    </select>
+    <div id="helper" class="tasks"></div>
   </div>
-</div>
 
-<div id="JuniorAdmin" class="modal">
-  <div class="modal-content"><span class="close" onclick="closeModal('JuniorAdmin')">&times;</span>
-    <h2>Junior Admin – Niko</h2>
-    <ul>
-      <li>Ndihmë për General & Head</li>
-      <li>Monitorim serveri</li>
-      <li>Trajnim praktik</li>
-      <li>Suport pa vendime të rënda</li>
-    </ul>
-  </div>
-</div>
-
-<div id="TrialAdmin" class="modal">
-  <div class="modal-content"><span class="close" onclick="closeModal('TrialAdmin')">&times;</span>
-    <h2>Trial Admin – Albozzi</h2>
-    <ul>
-      <li>Vëzhgim dhe raportim</li>
-      <li>Ndihmë bazike</li>
-      <li>Mësim procedurash</li>
-      <li>Suport i thjeshtë</li>
-    </ul>
-  </div>
-</div>
-
-<div id="Helper" class="modal">
-  <div class="modal-content"><span class="close" onclick="closeModal('Helper')">&times;</span>
-    <h2>Helper – Loco / Rohan / Leo</h2>
-    <ul>
-      <li>Ndihmë për lojtarë të rinj</li>
-      <li>Sqarim komandash</li>
-      <li>Raportim probleme</li>
-      <li>Asistim pa vendime</li>
-    </ul>
-  </div>
-</div>
-
-<div id="StaffRules" class="modal">
-  <div class="modal-content"><span class="close" onclick="closeModal('StaffRules')">&times;</span>
-    <h2>Staff Rules</h2>
-    <ul>
-      <li>Cdo antar i stafit duhet te ruaje respektin ne konfront me te tjeret.</li>
-      <li>Mos abuzoni me komandat e stafit.</li>
-      <li>Nuk duhet te nderhyni ne roleplay pa arsye...</li>
-      <li>Perdorni gjithmone kanalet zyrtare...</li>
-      <li>Cdo anetar i stafit duhet te jete aktiv...</li>
-      <li>Gjithmone beni <strong>screenshots</strong>...</li>
-      <li>Si pjese e stafit, perfaqesoni serverin ne publik...</li>
-      <li>Absolutisht mos u futni <strong>onduty</strong>...</li>
-    </ul>
-    <h3>Shkeljet e rregullave:</h3>
-    <p>Cdo shkelje do te coj menjehere ne <strong>official warn</strong>. Pas <strong>3 warn</strong>, do te perjashtoheni nga stafi.</p>
-  </div>
-</div>
-
-<!-- Collapsible Important Notes -->
-<div style="max-width:1000px;margin:40px auto;">
-  <button id="importantBtn">Important Notes & Links</button>
-  <div id="importantContent">
-    <p>📌 Për çdo problem ose pyetje, kontaktoni <strong>Head Admin / Executive</strong> në Discord.<br>
-       🌐 Shikoni gjithmonë kanalet zyrtare për updates dhe rregulla.<br>
-       ⚠️ Respektoni hierarkinë dhe procedurat gjatë roleplay / staf duties.<br>
-       🚨 Ky seksion mund të përditësohet rregullisht.</p>
-  </div>
 </div>
 
 <script>
 // LOGIN
-/*
 const PASSWORD="IMPACT2026";
 function login(){
   const passInput=document.getElementById("pass").value;
   const errorBox=document.getElementById("error");
   if(passInput===PASSWORD){
     document.getElementById("login").style.display="none";
-    document.querySelector(".container").style.display="grid";
+    document.querySelector(".staff-list").style.display="flex";
     errorBox.style.display="none";
-  } else { errorBox.style.display="block"; errorBox.textContent="Wrong password!"; }
+  } else {
+    errorBox.style.display="block";
+    errorBox.textContent="Wrong password!";
+  }
 }
-*/
-// MODALS
-function openModal(id){document.getElementById(id).style.display="block";}
-function closeModal(id){document.getElementById(id).style.display="none";}
 
-// COLLAPSIBLE
-const importantBtn=document.getElementById("importantBtn");
-const importantContent=document.getElementById("importantContent");
-importantBtn.onclick=()=>{importantContent.style.maxHeight ? importantContent.style.maxHeight=null : importantContent.style.maxHeight=importantContent.scrollHeight+"px";};
+// TASKS DATA
+const tasksData = {
+  management:{Xika:["Vendime kryesore per serverin","Miratim i rregullave, update-ve dhe aktiviteteve","Mbikqyrja e stafit Executive dhe Head Admin","Koordinim me Mod-at: Event, Faction, Gang","Siguron qe gjithcka funksionon sipas rregullave"]},
+  developer:{Oktavian:["Menaxhimi dhe mirembajtja e skripteve te serverit","Implementimi i funksioneve te reja sipas kerkeseve te stafit dhe management-it","Rregullimi i bugs / problemeve teknike","Sigurimi qe serveri te funksionoje stabil dhe me performance optimale","Dokumentim i skripteve dhe update-ve per reference te stafit","Testimi i funksioneve para publikimit ne server","Bashkepunim me Event Mods, Faction Mods dhe staf tjeter","Propozimi i permiresimeve dhe optimizimeve per sistemet ekzistuese"]},
+  executive:{Klearti:["Mbikqyrja e stafit (Head/Admin/Helper)","Vendime ne raste serioze","Zbatimi i rregullave","Promovim / ulje staf","Faction Mod / Event Mod","Asistim gjate Gang Modit","Rekrutimi i admineve","Monitorim InGame"],Denozzi:["Gang Mod","Event Mod","Mapper","Koordinim eventet","Mbikqyrja stafit operativ","Shqyrtim ankesa dhe raporte","Trajnim dhe asistim per staf","Siguron qe eventet ecin qarte"]},
+  headadmin:{Useli:["Kontroll operativ","Trajnim i stafit te ri","Zgjidhje raste serioze","Mbikqyrja Event/Gang/Faction","Raportim te Executive"],Mateo:["Monitorim i respektimit te rregullave","Trajnim dhe mentoring per staf te ri","Planifikim dhe organizim i takimeve te stafit","Mbikqyrje e faction, gang dhe event aktiviteteve","Verifikim dhe shqyrtim i raporteve te stafit"],Snaky:["Supervizim i implementimit te rregullave dhe procedurave","Kontroll i eventeve dhe koordinim me Mapper/Mods","Analizim i performances se stafit dhe lojtareve","Mbikqyrje e aktiviteteve operative ne server","Raportim i rezultateve dhe rekomandime per Executive"]},
+  admin:{Albozzi:["Mbajtja e rregullit","Ndihme per lojtaret","Monitorim serveri","Suport Faction/Gang/Event","Raportim te Head Admin"],Kristo:["Mbajtja e rregullit","Ndihme per lojtaret","Monitorim serveri","Suport Faction/Gang/Event","Raportim te Head Admin"],Erdi:["Mbajtja e rregullit","Ndihme per lojtaret","Monitorim serveri","Suport Faction/Gang/Event","Raportim te Head Admin"],Edi:["Mbajtja e rregullit","Ndihme per lojtaret","Monitorim serveri","Suport Faction/Gang/Event","Raportim te Head Admin"],Carlo:["Mbajtja e rregullit","Ndihme per lojtaret","Monitorim serveri","Suport Faction/Gang/Event","Raportim te Head Admin"]},
+  helper:{Loco:["Ndihme per lojtare te rinj","Sqarim komandash dhe funksionesh","Raportim i problemeve te lojtareve","Asistim pa vendime te rendesishme","Mbikqyrje e kanaleve te ndihmes"],Loku:["Mbeshtejte per lojtare te rinj","Kontroll i respektimit te rregullave bazike","Raportim i abuzimeve te vogla","Asistim ne evente te thjeshta","Koordinim me stafin per ndihme"],Rohan:["Sqarim i procedurave InGame","Ndihme per komandat bazike","Mbikqyrje e lojtareve te rinj","Raportim i problemeve tek Admin","Asistim gjate eventeve te vogla"],Snizzy:["Mbikqyrje e kanaleve ndihmese","Ndihme per lojtaret e rinj","Kontroll i respektimit te rregullave bazike","Raportim tek Admin per abuzime","Asistim ne koordinim me stafin"],Tomas:["Kontroll i aktiviteteve te Helper-ve","Asistim per lojtare te rinj","Mbikqyrje e situatave problematike","Raportim i abuzimeve tek Admin","Koordinim me stafin per ndihme"]}};
 
-// SNOW
-function snow(){const f=document.createElement("div");f.className="snow";f.innerHTML="❄";f.style.left=Math.random()*innerWidth+"px";f.style.fontSize=(Math.random()*10+10)+"px";f.style.animationDuration=(Math.random()*5+5)+"s";document.body.appendChild(f);setTimeout(()=>f.remove(),10000);}
+// SHOW TASKS
+function showTasks(rank, name){
+  const container = document.getElementById(rank);
+  container.innerHTML = "";
+  if(name && tasksData[rank][name]){
+    const ul = document.createElement("ul");
+    tasksData[rank][name].forEach(task=>{
+      const li = document.createElement("li");
+      li.textContent = task;
+      ul.appendChild(li);
+    });
+    container.appendChild(ul);
+  }
+}
+
+// SNOW EFFECT
+function snow(){
+  const f=document.createElement("div");
+  f.className="snow"; f.innerHTML="❄"; 
+  f.style.left=Math.random()*innerWidth+"px"; 
+  f.style.fontSize=(Math.random()*10+10)+"px"; 
+  f.style.animationDuration=(Math.random()*5+5)+"s"; 
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),10000);
+}
 setInterval(snow,120);
 </script>
+
+<!-- FOOTER -->
+<footer>
+  <a href="https://discord.gg/impact-roleplay" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" style="width:20px;vertical-align:middle;"> Discord
+  </a>
+  | IP: <span>95.179.176.92:7777</span>
+  <br>
+  &copy; 2026 IMPACT ROLEPLAY. Te gjitha te drejtat e rezervuara.
+  <br>
+  <span style="font-size:12px;color:#257870;">Edited by @klearti</span>
+</footer>
+
 
 </body>
 </html>
